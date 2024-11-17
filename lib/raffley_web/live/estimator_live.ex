@@ -7,7 +7,16 @@ defmodule RaffleyWeb.EstimatorLive do
      |> assign(tickets: 0, price: 3)}
   end
 
-  # def handle_event("calculate", %{"amount" => amount}, socket) do
-  #   {:noreply, socket}
-  # end
+  def handle_event("add", %{"quantity" => quantity}, socket) do
+    quantity = String.to_integer(quantity)
+    # current_ticket_count = socket.assigns.tickets
+    # new_ticket_count = current_ticket_count + quantity
+    # socket = assign(socket, tickets: new_ticket_count)
+
+    # Explanation: behind the scenes, this is exactly what update/3 does
+
+    {:noreply,
+     socket
+     |> update(:tickets, &(&1 + quantity))}
+  end
 end
