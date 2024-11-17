@@ -18,7 +18,7 @@ defmodule Raffley.Rules do
 
   def get_rule(id) when is_integer(id) do
     list_rules()
-    |> Enum.find(fn rule -> rule.id == id end)
+    |> Enum.find(&(&1.id == id))
   end
 
   def get_rule(id) when is_binary(id) do
