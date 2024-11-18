@@ -2,6 +2,10 @@ defmodule RaffleyWeb.EstimatorLive do
   use RaffleyWeb, :live_view
 
   def mount(_params, _session, socket) do
+    if connected?(socket) do
+      Process.send_after(self(), :tick, 2000)
+    end
+
     {:ok,
      socket
      |> assign(tickets: 0, price: 3)}
@@ -23,5 +27,13 @@ defmodule RaffleyWeb.EstimatorLive do
   def handle_event("set-price", %{"price" => price}, socket) do
     price = String.to_integer(price)
     {:noreply, socket |> assign(price: price)}
+  end
+
+  # Messages sent by Elixir processes
+  def handle_info(:tick, socket) do
+    # Schedule the next tick
+    Process.send_after(self(), :tick, 2000)
+
+    {:noreply, socket |> update(:tickets, &(&1 + 10))}
   end
 end
