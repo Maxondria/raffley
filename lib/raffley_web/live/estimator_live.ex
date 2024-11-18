@@ -19,4 +19,9 @@ defmodule RaffleyWeb.EstimatorLive do
      socket
      |> update(:tickets, &(&1 + quantity))}
   end
+
+  def handle_event("set-price", %{"price" => price}, socket) do
+    price = String.to_integer(price)
+    {:noreply, socket |> assign(price: price)}
+  end
 end
