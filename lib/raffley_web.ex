@@ -90,6 +90,9 @@ defmodule RaffleyWeb do
       # Shortcut for generating JS commands
       alias Phoenix.LiveView.JS
 
+      # These are my custom components I want toload globally
+      # import RaffleyWeb.CustomComponents
+
       # Routes generation with the ~p sigil
       unquote(verified_routes())
     end
