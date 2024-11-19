@@ -8,7 +8,7 @@ defmodule RaffleyWeb.EstimatorLive do
 
     {:ok,
      socket
-     |> assign(tickets: 0, price: 3)}
+     |> assign(tickets: 0, price: 3, page_title: "Estimator")}
   end
 
   def handle_event("add", %{"quantity" => quantity}, socket) do
