@@ -50,4 +50,31 @@ defmodule RaffleyWeb.CustomComponents do
     </div>
     """
   end
+
+  slot :inner_block, required: true
+
+  # This is an optional slot (list of assigns because we can render multiple 'details' slots - see above).
+  slot :details
+
+  def banner(assigns) do
+    assigns =
+      assigns
+      |> assign(
+        emoji:
+          ~w(🎉 🎊 🎉 🎊 🎉 🎊)
+          |> Enum.random()
+      )
+
+    ~H"""
+    <div class="banner">
+      <h1>
+        <%= render_slot(@inner_block, @emoji) %>
+      </h1>
+      <div :for={detail <- @details} class="details">
+        <%!-- emoji is in the assigns map now, so we can access it as @emoji --%>
+        <%= render_slot(detail, @emoji) %>
+      </div>
+    </div>
+    """
+  end
 end
