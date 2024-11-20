@@ -40,4 +40,20 @@ defmodule Raffley.Raffles do
       }
     ]
   end
+
+  def get_one!(id) when is_integer(id) do
+    list()
+    |> Enum.find(&(&1.id == id))
+  end
+
+  def get_one!(id) when is_binary(id) do
+    id
+    |> String.to_integer()
+    |> get_one!()
+  end
+
+  def get_featured(raffle) do
+    list()
+    |> Enum.filter(&(&1.id != raffle.id))
+  end
 end
