@@ -1,7 +1,8 @@
 defmodule RaffleyWeb.RaffleLive.Index do
   use RaffleyWeb, :live_view
 
-  alias Raffley.{Raffle, Raffles}
+  alias Raffley.{Raffles}
+  alias Raffley.Raffles.Raffle
 
   import RaffleyWeb.CustomComponents
 
